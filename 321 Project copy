@@ -10,9 +10,9 @@ public class Main {
 
     private static void Run() {
         // dummy data to start
-        Song mySong1 = new Song("Do you", "Troyboi");
+        Song mySong1 = new Song("Do_you", "Troyboi");
         Song mySong2 = new Song("Bleach", "Brockhampton");
-        Song mySong3 = new Song("Pink + White", "Frank Ocean");
+        Song mySong3 = new Song("Pink_+_White", "Frank_Ocean");
 
         ArrayList<Playlist> allList = new ArrayList<>();
 
@@ -37,6 +37,8 @@ public class Main {
         String theList;
         int index;
         Song song;
+        Song currentSong = mySong1;
+        String currentPlaylist = "defaultlist";
 
 
 
@@ -94,6 +96,8 @@ public class Main {
                         allList.get(index).addSong(song);
                         allList.get(index).printList();
                     }
+                    break;
+
                 case "d":
                     songName = scan.next();
                     artist = scan.next();
@@ -106,6 +110,7 @@ public class Main {
                     } else {
                         allList.get(index).deleteSong(song);
                         allList.get(index).printList();
+                        System.out.println("Song deleted");
                     }
                     break;
                 case "q":
@@ -131,6 +136,7 @@ public class Main {
     public static void promptUser() {
         // prompt user to add a song
         System.out.println("Welcome to the program!\n"
+                +"Now Playing " +
                 + "What do you want to do?\n"
                 + "Add a playlist:		p <playlist_name>\n"
                 + "Add a song: 		s <song_name> <artist_name> <playlist_name>\n"
@@ -184,7 +190,7 @@ class Playlist {
     public void deleteSong(Song song) {
         for(int i = 0; i < size; i++) {
             Song search = playlist.get(i);
-            if(search.getName() == song.getName() && search.getArtist() == song.getArtist()) {
+            if(search.getName().equals(song.getName()) && search.getArtist().equals(song.getArtist())) {
                 // found the song to delete
                 playlist.remove(i);
                 size = playlist.size();
